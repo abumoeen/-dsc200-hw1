@@ -30,8 +30,8 @@ In the chunk below we modify the data by joining the various data frames provide
 unvotes <- un_votes %>%
   mutate(country =
            case_when(
-             country == "United Kingdom of Great Britain and Northern Ireland" ~ "UK & NI",
-             country == "United States of America"                             ~ "US",
+             country == "United Arab Emirates" ~ "UAE",
+             country == "Saudi Arabia"                             ~ "SA",
              TRUE                                                              ~ country
            )) %>%
   inner_join(un_roll_calls, by = "rcid") %>%
@@ -48,7 +48,7 @@ See the [Appendix](#appendix) for a list of the countries in the data.
 
 ```{r plot-yearly-yes-issue, fig.width=10, fig.height=6, message=FALSE}
 unvotes %>%
-  filter(country %in% c("UK & NI", "US", "Turkey")) %>%
+  filter(country %in% c("UAE", "SA", "Turkey")) %>%
   mutate(year = year(date)) %>%
   group_by(country, year, issue) %>%
   summarize(percent_yes = mean(vote == "yes")) %>%
